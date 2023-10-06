@@ -21,19 +21,18 @@ public final class Constants {
 
   public static class IntakeConstants {
     // INTAKE MOTOR ID
-    public static final int INTAKE_ID = 25;
+    public static final int INTAKE_ID = 44;
 
     public static final double INTAKE_PCT = -0.4;
 
     public static final double OUTTAKE_VOLTS = 6.3;
     public static final double OUTTAKE_VOLTS_CUBE = 4.2;
   }
-
   public static class ArmConstants {
-    public static final int BASE_ID = 20;
-    public static final int WRIST_ID = 21;
+    public static final int BASE_ID = 41;
+    public static final int WRIST_ID = 43;
 
-    public static final int BASE_FOLLOWER_ID = 22;
+    public static final int BASE_FOLLOWER_ID = 42;
 
     public static final double BASE_kF = 0;
     public static final double BASE_kP = 0.2;
@@ -144,23 +143,29 @@ public final class Constants {
   }
 
   // MOTOR IDS for the SWERVE
-  public static int AXIS_FL_ID = 0;
-  public static int AXIS_BL_ID = 1;
-  public static int AXIS_FR_ID = 3;
-  public static int AXIS_BR_ID = 7;
+  public static int AXIS_FL_ID = 8;
+  public static int AXIS_BL_ID = 4;
+  public static int AXIS_FR_ID = 2;
+  public static int AXIS_BR_ID = 6;
 
-  public static int DRIVE_FL_ID = 8;
-  public static int DRIVE_BL_ID = 9;
-  public static int DRIVE_FR_ID = 4;
-  public static int DRIVE_BR_ID = 5;
+  public static int DRIVE_FL_ID = 12;
+  public static int DRIVE_BL_ID = 13;
+  public static int DRIVE_FR_ID = 11;
+  public static int DRIVE_BR_ID = 14;
 
   // CANCODER IDS
-  public static int CODER_FL_ID = 12;
-  public static int CODER_BL_ID = 2;
-  public static int CODER_FR_ID = 13;
-  public static int CODER_BR_ID = 11;
+  public static int CODER_FL_ID = 32; //POSSIBLY 30'S
+  public static int CODER_BL_ID = 33;
+  public static int CODER_FR_ID = 31;
+  public static int CODER_BR_ID = 34;
 
+  public static double[] ENCODER_OFFSETS = {
+    206.895, //FL
+    89.033, //BL
+    1.143, //FR
+    189.580, //BR
 
+  };
   // Indexer Output
   public static double INDEXER_TARGET = 0.8;
 
@@ -194,7 +199,7 @@ public final class Constants {
   public static double DRIVE_kI = 0.0;
   public static double DRIVE_kD = 0.00;
 
-  public static double STEERING_RATIO = 12.8;
+  public static double STEERING_RATIO = 150.0/7.0;
   public static double DRIVING_RATIO = 6.75;
 
   public static double WHEEL_RADIUS_METERS = 0.0508;

@@ -6,6 +6,8 @@ import com.ctre.phoenix.sensors.CANCoder;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants;
 import static frc.robot.Constants.*;
 import static java.lang.Math.PI;
@@ -22,14 +24,13 @@ public class SwerveCombo {
 
     double absEncDeg;
     CANCoder coder;
-
+    ShuffleboardTab tab;
     // Note: Phoenix Lib init knocks motors out of alignment
     // Wait until you see that on the console before running, else realign
 
     public SwerveCombo(WPI_TalonFX axisInit, WPI_TalonFX driveInit, CANCoder coderInit, int position) {
 
         new Constants();
-
         // get coder position on start up
         this.coder = coderInit;
 
@@ -64,8 +65,9 @@ public class SwerveCombo {
         this.driveMotor.configClosedloopRamp(0.05);
 
         this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60,80, 0.75));
-
         this.mPosition = position;
+        this.driveMotor.configNeutralDeadband(0.1);
+        this.axisMotor.configNeutralDeadband(0.1);
 
         // TODO: in hindsight, probably needed to current limit
 
@@ -82,6 +84,8 @@ public class SwerveCombo {
 
         // thank you CTRE for making this per 100ms
         // I'm sure it was for a good reason at some point
+
+        //!! WHY IS THIS 204.8
         double driveConstant = 204.8/(2*PI)*DRIVING_RATIO/WHEEL_RADIUS_METERS;
         double angleConstant = 2048/(2*PI)*STEERING_RATIO;
 
@@ -122,6 +126,7 @@ public class SwerveCombo {
 
         // set some deadzones
 //        this.driveMotor.set(ControlMode.Velocity, speed);
+        System.out.println(angleFinal);
         if (speed < 120) {
             this.axisMotor.set(ControlMode.Velocity, 0);
             this.driveMotor.set(ControlMode.Velocity, 0);
@@ -169,7 +174,7 @@ public class SwerveCombo {
         // convert to final position target
         double angleFinal = encAngle + dTheta;
         angleFinal *= angleConstant;
-
+        System.out.println(angleFinal);
         this.axisMotor.set(ControlMode.Position, angleFinal);
         this.driveMotor.set(ControlMode.Velocity, speed);
 
@@ -177,7 +182,10 @@ public class SwerveCombo {
 
     // resets encoders from CanCoder value
     public void zero() {
-        absEncDeg = this.coder.getAbsolutePosition();
+        absEncDeg = this.coder.getAbsolutePosition() - Constants.ENCODER_OFFSETS[mPosition];
+        // absEncDeg = this.coder.getAbsolutePosition();
+        
+        // absEncDeg = this.coder.getAbsolutePosition();
         this.axisMotor.setSelectedSensorPosition(-(absEncDeg/360)*2048*STEERING_RATIO);
         this.axisMotor.set(ControlMode.Velocity, 0);
     }

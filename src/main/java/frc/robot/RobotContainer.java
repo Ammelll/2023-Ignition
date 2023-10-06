@@ -413,6 +413,12 @@ public class RobotContainer {
 //        }));
 
          m_controller.y().onTrue(new TwoPartHigh(m_arm));
+         m_controller.y().onTrue(Commands.runOnce(()->{
+                m_chassis.comboFR.zero();
+                m_chassis.comboBR.zero();
+                m_chassis.comboFL.zero();
+                m_chassis.comboBL.zero();
+         }));
 
 //        m_controller.y().onTrue(new TwoPartHigh(m_arm));
         // m_controller.y().onTrue(m_arm.runOnce(() -> {m_arm.setTalonTargets(MID_BASE_POS, -190*PI/180/(PI/1024/WRIST_GEAR_RATIO));}));
@@ -448,6 +454,7 @@ public class RobotContainer {
         // m_controller.rightBumper().onTrue(m_arm.runOnce(() -> {m_arm.setTalonTargets(INTAKE_BASE_POS_CONE, INTAKE_WRIST_POS_CONE);}));
         m_controller.rightBumper().onTrue(m_arm.runOnce(() -> {
             m_arm.setArmConeIntake();
+            mIntake.set(INTAKE_PCT);
         }));
         m_controller.rightBumper().onFalse(mIntake.runOnce(() -> {
             mIntake.set(-0.075);

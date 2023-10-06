@@ -2,7 +2,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
-import com.kauailabs.navx.frc.AHRS;
+import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
+import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.VecBuilder;
@@ -64,7 +66,7 @@ public class Chassis extends SubsystemBase {
     public SwerveCombo comboFR = new SwerveCombo(axis2, drive2, coder2, 2);
     public SwerveCombo comboBR = new SwerveCombo(axis3, drive3, coder3, 3);
 
-    public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
+    public static WPI_PigeonIMU ahrs = new WPI_PigeonIMU(51);
 
     ShuffleboardTab tab = Shuffleboard.getTab("General");
 
@@ -361,14 +363,14 @@ public class Chassis extends SubsystemBase {
 
     public void resetGyro() {
         ahrs.reset();
-        ahrs.setAngleAdjustment(0);
+        // ahrs.setAngleAdjustment(0);
         desiredHeading = 0;
     }
 
     public void setGyroAngle(double angle) {
         ahrs.calibrate();
         ahrs.reset();
-        ahrs.setAngleAdjustment(angle);
+        // ahrs.setAngleAdjustment(angle);
     }
 
     public void setPrecisionTrue(){
