@@ -92,10 +92,11 @@ public class RobotContainer {
         // Configure the trigger bindings
         configureBindings();
 
-        // m_chassis.comboFR.zero();
-        // m_chassis.comboBR.zero();
-        // m_chassis.comboFL.zero();
-        // m_chassis.comboBL.zero();
+
+        m_chassis.comboFR.zero();
+        m_chassis.comboBR.zero();
+        m_chassis.comboFL.zero();
+        m_chassis.comboBL.zero();
 
         m_chassis.setDefaultCommand(new ChassisDriveFC(m_chassis));
         m_arm.setDefaultCommand(new ManageArm(m_arm));

@@ -160,10 +160,10 @@ public final class Constants {
   public static int CODER_BR_ID = 34;
 
   public static double[] ENCODER_OFFSETS = {
-    207.598, //FL
-    88.770, //BL
-    0.527, //FR
-    190.283, //BR
+    210.498, //FL
+    446.484 - 360, //BL
+    -2.285 + 360, //FR
+    190.635, //BR
 
   };
   // Indexer Output

@@ -1,5 +1,6 @@
 package frc.robot.modules;
 
+import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
@@ -23,7 +24,7 @@ public class SwerveCombo {
     int mPosition;
 
     double absEncDeg;
-    CANCoder coder;
+    public CANCoder coder;
     ShuffleboardTab tab;
     // Note: Phoenix Lib init knocks motors out of alignment
     // Wait until you see that on the console before running, else realign
@@ -35,9 +36,20 @@ public class SwerveCombo {
         this.coder = coderInit;
 
         this.absEncDeg = coderInit.getAbsolutePosition();
+        this.axisMotor = axisInit;
+
+        // while(true) {
+        while (axisMotor.configNeutralDeadband(0.0001) != ErrorCode.OK) {
+            System.out.println(coder.getAbsolutePosition());
+            // System.out.println("[INIT] Waiting for can chain. Module #" + position + axisMotor.configNeutralDeadband(0.0001).toString());               
+        }
+        
+        while (axisMotor.configNeutralDeadband(0.0001) == ErrorCode.OK) {
+            System.out.println(coder.getAbsolutePosition());
+            // System.out.println("[INIT] Waiting for can chain. Module #" + position + axisMotor.configNeutralDeadband(0.0001).toString());               
+        }
 
         // configure axis motor on set up
-        this.axisMotor = axisInit;
         this.axisMotor.setInverted(TalonFXInvertType.Clockwise);
         this.axisMotor.configNeutralDeadband(0.0001);
         this.axisMotor.configSelectedFeedbackSensor(FeedbackDevice.valueOf(1));
@@ -187,7 +199,7 @@ public class SwerveCombo {
         
         // absEncDeg = this.coder.getAbsolutePosition();
         //maybe 2048
-        this.axisMotor.setSelectedSensorPosition(-(absEncDeg/360)*1024*STEERING_RATIO);
+        this.axisMotor.setSelectedSensorPosition(-(absEncDeg/360.0)*2048.0*STEERING_RATIO);
         this.axisMotor.set(ControlMode.Velocity, 0);
     }
 
