@@ -70,7 +70,6 @@ public class SwerveCombo {
         this.axisMotor.configNeutralDeadband(0.1);
 
         // TODO: in hindsight, probably needed to current limit
-
     }
 
 
@@ -126,8 +125,7 @@ public class SwerveCombo {
 
         // set some deadzones
 //        this.driveMotor.set(ControlMode.Velocity, speed);
-        System.out.println(angleFinal);
-        if (speed < 120) {
+        if (speed < 150) {
             this.axisMotor.set(ControlMode.Velocity, 0);
             this.driveMotor.set(ControlMode.Velocity, 0);
         // push values to PID controllers
@@ -135,6 +133,8 @@ public class SwerveCombo {
             this.axisMotor.set(ControlMode.Position, angleFinal);
             this.driveMotor.set(ControlMode.Velocity, invertK*speed);
         }
+        System.out.println(angleFinal);
+
     }
 
     public void passArgsNoDeadzone(double speed, double angle) {
@@ -186,7 +186,8 @@ public class SwerveCombo {
         // absEncDeg = this.coder.getAbsolutePosition();
         
         // absEncDeg = this.coder.getAbsolutePosition();
-        this.axisMotor.setSelectedSensorPosition(-(absEncDeg/360)*2048*STEERING_RATIO);
+        //maybe 2048
+        this.axisMotor.setSelectedSensorPosition(-(absEncDeg/360)*1024*STEERING_RATIO);
         this.axisMotor.set(ControlMode.Velocity, 0);
     }
 

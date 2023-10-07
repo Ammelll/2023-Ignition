@@ -29,10 +29,10 @@ public final class Constants {
     public static final double OUTTAKE_VOLTS_CUBE = 4.2;
   }
   public static class ArmConstants {
-    public static final int BASE_ID = 41;
+    public static final int BASE_ID = 42;
     public static final int WRIST_ID = 43;
 
-    public static final int BASE_FOLLOWER_ID = 42;
+    public static final int BASE_FOLLOWER_ID = 41;
 
     public static final double BASE_kF = 0;
     public static final double BASE_kP = 0.2;
@@ -160,10 +160,10 @@ public final class Constants {
   public static int CODER_BR_ID = 34;
 
   public static double[] ENCODER_OFFSETS = {
-    206.895, //FL
-    89.033, //BL
-    1.143, //FR
-    189.580, //BR
+    207.598, //FL
+    88.770, //BL
+    0.527, //FR
+    190.283, //BR
 
   };
   // Indexer Output

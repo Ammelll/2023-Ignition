@@ -67,7 +67,6 @@ public class Chassis extends SubsystemBase {
     public SwerveCombo comboBR = new SwerveCombo(axis3, drive3, coder3, 3);
 
     public static WPI_PigeonIMU ahrs = new WPI_PigeonIMU(51);
-
     ShuffleboardTab tab = Shuffleboard.getTab("General");
 
     public GenericEntry isLocked = tab.add("Locked", false).withWidget(BuiltInWidgets.kToggleButton).getEntry();
@@ -126,6 +125,7 @@ public class Chassis extends SubsystemBase {
         SmartDashboard.putData("Field", m_field);
 
         // TODO: Make sure this doesn't break anything
+        
         ahrs.calibrate();
 
         isLocked.setBoolean(false);
@@ -349,8 +349,6 @@ public class Chassis extends SubsystemBase {
                         this // Requires this drive subsystem
                 )
         );
-
-
     }
 
     public double getPitch(){

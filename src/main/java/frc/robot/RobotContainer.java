@@ -92,10 +92,10 @@ public class RobotContainer {
         // Configure the trigger bindings
         configureBindings();
 
-        m_chassis.comboFR.zero();
-        m_chassis.comboBR.zero();
-        m_chassis.comboFL.zero();
-        m_chassis.comboBL.zero();
+        // m_chassis.comboFR.zero();
+        // m_chassis.comboBR.zero();
+        // m_chassis.comboFL.zero();
+        // m_chassis.comboBL.zero();
 
         m_chassis.setDefaultCommand(new ChassisDriveFC(m_chassis));
         m_arm.setDefaultCommand(new ManageArm(m_arm));
@@ -426,6 +426,7 @@ public class RobotContainer {
         // m_controller.x().onTrue(m_arm.runOnce(() -> {m_arm.setTalonTargets(MID_BASE_POS, MID_WRIST_POS);}));
         m_controller.x().onTrue(m_arm.runOnce(() -> {
             m_arm.setArmMid();
+            mIntake.set(INTAKE_PCT);
         }));
 //    m_controller.x().onTrue(m_arm.runOnce(() -> {m_arm.setTalonTargets(MID_BASE_POS, 0);}));
 //    m_controller.y().whileTrue(m_arm.run(() -> {m_arm.passSetpoints(PI/2/(PI/1024/BASE_GEAR_RATIO), 0);}));

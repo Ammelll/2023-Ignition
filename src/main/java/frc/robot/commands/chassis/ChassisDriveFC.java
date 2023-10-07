@@ -34,7 +34,7 @@ public class ChassisDriveFC extends CommandBase {
     public void execute() {
         // pass args to swerve modules
 
-        double angle = -(mChassis.ahrs.getAngle() % 360);
+        double angle = (mChassis.ahrs.getAngle() % 360);
 
         // toggle gyro off
 //        angle = 0;
